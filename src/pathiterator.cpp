@@ -9,7 +9,7 @@ PathIterator::PathIterator(const Graph &g, int v, int l)
   // Nothing adjacent. Shouldn't be possible, best to check.
   if (graph.edgeLists[v].size() == 0)
     this.length = 0;
-  this.nextVert = graph.edgeLists[v][0];
+  this.nextVertIndex = 0;
 
 
 }

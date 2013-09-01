@@ -16,6 +16,7 @@ class PathIterator
 
     Graph graph;
     int length;
+    int nextVertIndex;
 }
 
 #endif /* PATHITERATOR_H */
