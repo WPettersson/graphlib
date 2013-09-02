@@ -12,5 +12,7 @@ void Step::setColour(int c)
 
 void Step::avoid(int count, int[] a)
 {
-  toAvoid(a,a+count);
+  for (int i = 0; i < count; i++) {
+    toAvoid[a[count]] = a[count];
+  }
 }

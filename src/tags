@@ -19,30 +19,35 @@ CycleFill::lengths	cyclefill.h	/^    std::vector<int> lengths;$/;"	m	class:Cycle
 CycleFill::run	cyclefill.h	/^    void run(Graph) const;$/;"	p	class:CycleFill	access:public	signature:(Graph) const
 CycleFill::setLengths	cyclefill.h	/^    void setLengths(int []);$/;"	p	class:CycleFill	access:public	signature:(int [])
 EDGE_H	edge.h	2;"	d
-Edge	edge.cpp	/^Edge::Edge(int[] v)$/;"	f	class:Edge	signature:(int[] v)
+Edge	edge.cpp	/^Edge::Edge(int v0, int v1)$/;"	f	class:Edge	signature:(int v0, int v1)
 Edge	edge.h	/^    Edge(int, int);$/;"	p	class:Edge	access:public	signature:(int, int)
 Edge	edge.h	/^class Edge$/;"	c
-Edge::Edge	edge.cpp	/^Edge::Edge(int[] v)$/;"	f	class:Edge	signature:(int[] v)
+Edge::Edge	edge.cpp	/^Edge::Edge(int v0, int v1)$/;"	f	class:Edge	signature:(int v0, int v1)
 Edge::Edge	edge.h	/^    Edge(int, int);$/;"	p	class:Edge	access:public	signature:(int, int)
 Edge::colour	edge.h	/^    int colour;$/;"	m	class:Edge	access:public
-Edge::other	edge.cpp	/^int Edge::other(int v) const$/;"	f	class:Edge	signature:(int v) const
+Edge::other	edge.cpp	/^int Edge::other(int vert) const$/;"	f	class:Edge	signature:(int vert) const
 Edge::other	edge.h	/^    int other(int) const;$/;"	p	class:Edge	access:public	signature:(int) const
 Edge::toString	edge.cpp	/^std::string Edge::toString() const$/;"	f	class:Edge	signature:() const
-Edge::touches	edge.cpp	/^int Edge::touches(int v) const$/;"	f	class:Edge	signature:(int v) const
+Edge::toString	edge.h	/^    std::string toString() const;$/;"	p	class:Edge	access:public	signature:() const
+Edge::touches	edge.cpp	/^bool Edge::touches(int vert) const$/;"	f	class:Edge	signature:(int vert) const
 Edge::touches	edge.h	/^    bool touches(int) const;$/;"	p	class:Edge	access:public	signature:(int) const
 Edge::v	edge.h	/^    int v[2];$/;"	m	class:Edge	access:private
 GRAPH_H	graph.h	2;"	d
-Graph	graph.cpp	/^Graph::Graph()$/;"	f	class:Graph	signature:()
-Graph	graph.h	/^    Graph();$/;"	p	class:Graph	access:public	signature:()
+Graph	graph.cpp	/^Graph::Graph(int nVerts)$/;"	f	class:Graph	signature:(int nVerts)
+Graph	graph.h	/^    Graph(int nVerts);$/;"	p	class:Graph	access:public	signature:(int nVerts)
 Graph	graph.h	/^class Graph$/;"	c
-Graph::Graph	graph.cpp	/^Graph::Graph()$/;"	f	class:Graph	signature:()
-Graph::Graph	graph.h	/^    Graph();$/;"	p	class:Graph	access:public	signature:()
-Graph::checkpoint	graph.h	/^    int[] checkpoint;$/;"	m	class:Graph	access:public
+Graph::Graph	graph.cpp	/^Graph::Graph(int nVerts)$/;"	f	class:Graph	signature:(int nVerts)
+Graph::Graph	graph.h	/^    Graph(int nVerts);$/;"	p	class:Graph	access:public	signature:(int nVerts)
+Graph::addEdge	graph.cpp	/^void Graph::addEdge(int v1, int v2)$/;"	f	class:Graph	signature:(int v1, int v2)
+Graph::addEdge	graph.h	/^    void addEdge(int, int);$/;"	p	class:Graph	access:public	signature:(int, int)
+Graph::checkpoint	graph.h	/^    int checkpoint[];$/;"	m	class:Graph	access:public
 Graph::done	graph.h	/^    bool done;$/;"	m	class:Graph	access:public
-Graph::edgeLists	graph.h	/^    std::vector<std::vector<Edge *>> edgeLists;$/;"	m	class:Graph	access:public
-Graph::rampTo	graph.h	/^    int[] rampTo;$/;"	m	class:Graph	access:public
+Graph::edgeLists	graph.h	/^    Edge*** edgeLists;$/;"	m	class:Graph	access:public
+Graph::getEdge	graph.cpp	/^Edge* Graph::getEdge(int v1, int v2) const$/;"	f	class:Graph	signature:(int v1, int v2) const
+Graph::getEdge	graph.h	/^    Edge *getEdge(int, int) const;$/;"	p	class:Graph	access:public	signature:(int, int) const
+Graph::nVerts	graph.h	/^    int nVerts;$/;"	m	class:Graph	access:public
+Graph::rampTo	graph.h	/^    int rampTo[];$/;"	m	class:Graph	access:public
 Graph::rampingUp	graph.h	/^    bool rampingUp;$/;"	m	class:Graph	access:public
-Graph::steps	graph.h	/^    std::vector<Step *> steps;$/;"	m	class:Graph	access:public
 PATHITERATOR_H	pathiterator.h	2;"	d
 PATH_H	path.h	2;"	d
 Path	path.h	/^    Path();$/;"	p	class:Path	access:public	signature:()
@@ -51,16 +56,34 @@ Path::Path	path.h	/^    Path();$/;"	p	class:Path	access:public	signature:()
 Path::length	path.h	/^    int length;$/;"	m	class:Path	access:private
 Path::run	path.h	/^    void run(Graph) const;$/;"	p	class:Path	access:public	signature:(Graph) const
 Path::setLength	path.h	/^    void setLength(int);$/;"	p	class:Path	access:public	signature:(int)
-PathIterator	pathiterator.cpp	/^PathIterator::PathIterator(const Graph &g, int v, int l)$/;"	f	class:PathIterator	signature:(const Graph &g, int v, int l)
-PathIterator	pathiterator.h	/^    PathIterator(Graph, int);$/;"	p	class:PathIterator	access:public	signature:(Graph, int)
+PathIterator	pathiterator.cpp	/^PathIterator::PathIterator(const Graph *g, int now, int target, int length, $/;"	f	class:PathIterator	signature:(const Graph *g, int now, int target, int length, bool *avoid, int smallest = 0)
+PathIterator	pathiterator.h	/^    PathIterator(const Graph *g, int now, int target, int length, $/;"	p	class:PathIterator	access:public	signature:(const Graph *g, int now, int target, int length, bool avoid[], int smallest)
 PathIterator	pathiterator.h	/^class PathIterator$/;"	c
-PathIterator::PathIterator	pathiterator.cpp	/^PathIterator::PathIterator(const Graph &g, int v, int l)$/;"	f	class:PathIterator	signature:(const Graph &g, int v, int l)
-PathIterator::PathIterator	pathiterator.h	/^    PathIterator(Graph, int);$/;"	p	class:PathIterator	access:public	signature:(Graph, int)
-PathIterator::graph	pathiterator.h	/^    Graph graph;$/;"	m	class:PathIterator	access:private
-PathIterator::hasNext	pathiterator.cpp	/^bool PathIterator::hasNext() const$/;"	f	class:PathIterator	signature:() const
-PathIterator::hasNext	pathiterator.h	/^    bool hasNext() const;$/;"	p	class:PathIterator	access:public	signature:() const
+PathIterator::PathIterator	pathiterator.cpp	/^PathIterator::PathIterator(const Graph *g, int now, int target, int length, $/;"	f	class:PathIterator	signature:(const Graph *g, int now, int target, int length, bool *avoid, int smallest = 0)
+PathIterator::PathIterator	pathiterator.h	/^    PathIterator(const Graph *g, int now, int target, int length, $/;"	p	class:PathIterator	access:public	signature:(const Graph *g, int now, int target, int length, bool avoid[], int smallest)
+PathIterator::avoid	pathiterator.h	/^    bool *avoid;$/;"	m	class:PathIterator	access:private
+PathIterator::findNext	pathiterator.cpp	/^bool PathIterator::findNext()$/;"	f	class:PathIterator	signature:()
+PathIterator::findNext	pathiterator.h	/^    bool findNext();$/;"	p	class:PathIterator	access:private	signature:()
+PathIterator::found	pathiterator.h	/^    bool found;$/;"	m	class:PathIterator	access:private
+PathIterator::graph	pathiterator.h	/^    const Graph *graph;$/;"	m	class:PathIterator	access:private
+PathIterator::hasNext	pathiterator.cpp	/^bool PathIterator::hasNext()$/;"	f	class:PathIterator	signature:()
+PathIterator::hasNext	pathiterator.h	/^    bool hasNext();$/;"	p	class:PathIterator	access:public	signature:()
+PathIterator::last	pathiterator.h	/^    bool last;$/;"	m	class:PathIterator	access:private
 PathIterator::length	pathiterator.h	/^    int length;$/;"	m	class:PathIterator	access:private
+PathIterator::next	pathiterator.cpp	/^std::vector<Edge *> PathIterator::next()$/;"	f	class:PathIterator	signature:()
 PathIterator::next	pathiterator.h	/^    std::vector<Edge *> next();$/;"	p	class:PathIterator	access:public	signature:()
+PathIterator::nextEdgeIndex	pathiterator.h	/^    int nextEdgeIndex;$/;"	m	class:PathIterator	access:private
+PathIterator::nextPath	pathiterator.h	/^    std::vector<Edge *> nextPath;$/;"	m	class:PathIterator	access:private
+PathIterator::nextPaths	pathiterator.h	/^    PathIterator *nextPaths;$/;"	m	class:PathIterator	access:private
+PathIterator::nextVert	pathiterator.h	/^    int nextVert;$/;"	m	class:PathIterator	access:private
+PathIterator::nowVert	pathiterator.h	/^    int nowVert;$/;"	m	class:PathIterator	access:private
+PathIterator::smallest	pathiterator.h	/^    int smallest;$/;"	m	class:PathIterator	access:private
+PathIterator::targetVert	pathiterator.h	/^    int targetVert;$/;"	m	class:PathIterator	access:private
+PathIterator::toFind	pathiterator.h	/^    bool toFind;$/;"	m	class:PathIterator	access:private
+PathIterator::validNextVert	pathiterator.cpp	/^bool PathIterator::validNextVert(int v) const$/;"	f	class:PathIterator	signature:(int v) const
+PathIterator::validNextVert	pathiterator.h	/^    bool validNextVert(int v) const;$/;"	p	class:PathIterator	access:private	signature:(int v) const
+PathIterator::~PathIterator	pathiterator.cpp	/^PathIterator::~PathIterator()$/;"	f	class:PathIterator	signature:()
+PathIterator::~PathIterator	pathiterator.h	/^    ~PathIterator();$/;"	p	class:PathIterator	access:public	signature:()
 STEP_H	step.h	2;"	d
 Step	step.cpp	/^Step::Step()$/;"	f	class:Step	signature:()
 Step	step.h	/^    Step();$/;"	p	class:Step	access:public	signature:()
@@ -73,25 +96,42 @@ Step::colour	step.h	/^    int colour;$/;"	m	class:Step	access:private
 Step::run	step.h	/^    virtual void run(Graph) const;$/;"	p	class:Step	access:public	signature:(Graph) const
 Step::setColour	step.cpp	/^void Step::setColour(int c)$/;"	f	class:Step	signature:(int c)
 Step::setColour	step.h	/^    void setColour(int);$/;"	p	class:Step	access:public	signature:(int)
-Step::toAvoid	step.h	/^    std::set<int> toAvoid;$/;"	m	class:Step	access:private
+Step::toAvoid	step.h	/^    std::array<int> toAvoid;$/;"	m	class:Step	access:private
+addEdge	graph.cpp	/^void Graph::addEdge(int v1, int v2)$/;"	f	class:Graph	signature:(int v1, int v2)
+addEdge	graph.h	/^    void addEdge(int, int);$/;"	p	class:Graph	access:public	signature:(int, int)
+avoid	pathiterator.h	/^    bool *avoid;$/;"	m	class:PathIterator	access:private
 avoid	step.cpp	/^void Step::avoid(int count, int[] a)$/;"	f	class:Step	signature:(int count, int[] a)
 avoid	step.h	/^    void avoid(int[]);$/;"	p	class:Step	access:public	signature:(int[])
-checkpoint	graph.h	/^    int[] checkpoint;$/;"	m	class:Graph	access:public
+checkpoint	graph.h	/^    int checkpoint[];$/;"	m	class:Graph	access:public
 colour	edge.h	/^    int colour;$/;"	m	class:Edge	access:public
 colour	step.h	/^    int colour;$/;"	m	class:Step	access:private
 done	graph.h	/^    bool done;$/;"	m	class:Graph	access:public
-edgeLists	graph.h	/^    std::vector<std::vector<Edge *>> edgeLists;$/;"	m	class:Graph	access:public
-graph	pathiterator.h	/^    Graph graph;$/;"	m	class:PathIterator	access:private
-hasNext	pathiterator.cpp	/^bool PathIterator::hasNext() const$/;"	f	class:PathIterator	signature:() const
-hasNext	pathiterator.h	/^    bool hasNext() const;$/;"	p	class:PathIterator	access:public	signature:() const
+edgeLists	graph.h	/^    Edge*** edgeLists;$/;"	m	class:Graph	access:public
+findNext	pathiterator.cpp	/^bool PathIterator::findNext()$/;"	f	class:PathIterator	signature:()
+findNext	pathiterator.h	/^    bool findNext();$/;"	p	class:PathIterator	access:private	signature:()
+found	pathiterator.h	/^    bool found;$/;"	m	class:PathIterator	access:private
+getEdge	graph.cpp	/^Edge* Graph::getEdge(int v1, int v2) const$/;"	f	class:Graph	signature:(int v1, int v2) const
+getEdge	graph.h	/^    Edge *getEdge(int, int) const;$/;"	p	class:Graph	access:public	signature:(int, int) const
+graph	pathiterator.h	/^    const Graph *graph;$/;"	m	class:PathIterator	access:private
+hasNext	pathiterator.cpp	/^bool PathIterator::hasNext()$/;"	f	class:PathIterator	signature:()
+hasNext	pathiterator.h	/^    bool hasNext();$/;"	p	class:PathIterator	access:public	signature:()
+last	pathiterator.h	/^    bool last;$/;"	m	class:PathIterator	access:private
 length	cycle.h	/^    int length;$/;"	m	class:Cycle	access:private
 length	path.h	/^    int length;$/;"	m	class:Path	access:private
 length	pathiterator.h	/^    int length;$/;"	m	class:PathIterator	access:private
 lengths	cyclefill.h	/^    std::vector<int> lengths;$/;"	m	class:CycleFill	access:private
+main	testPaths.cpp	/^int main(int argc, char** argv)$/;"	f	signature:(int argc, char** argv)
+nVerts	graph.h	/^    int nVerts;$/;"	m	class:Graph	access:public
+next	pathiterator.cpp	/^std::vector<Edge *> PathIterator::next()$/;"	f	class:PathIterator	signature:()
 next	pathiterator.h	/^    std::vector<Edge *> next();$/;"	p	class:PathIterator	access:public	signature:()
-other	edge.cpp	/^int Edge::other(int v) const$/;"	f	class:Edge	signature:(int v) const
+nextEdgeIndex	pathiterator.h	/^    int nextEdgeIndex;$/;"	m	class:PathIterator	access:private
+nextPath	pathiterator.h	/^    std::vector<Edge *> nextPath;$/;"	m	class:PathIterator	access:private
+nextPaths	pathiterator.h	/^    PathIterator *nextPaths;$/;"	m	class:PathIterator	access:private
+nextVert	pathiterator.h	/^    int nextVert;$/;"	m	class:PathIterator	access:private
+nowVert	pathiterator.h	/^    int nowVert;$/;"	m	class:PathIterator	access:private
+other	edge.cpp	/^int Edge::other(int vert) const$/;"	f	class:Edge	signature:(int vert) const
 other	edge.h	/^    int other(int) const;$/;"	p	class:Edge	access:public	signature:(int) const
-rampTo	graph.h	/^    int[] rampTo;$/;"	m	class:Graph	access:public
+rampTo	graph.h	/^    int rampTo[];$/;"	m	class:Graph	access:public
 rampingUp	graph.h	/^    bool rampingUp;$/;"	m	class:Graph	access:public
 run	cycle.h	/^    void run(Graph) const;$/;"	p	class:Cycle	access:public	signature:(Graph) const
 run	cyclefill.h	/^    void run(Graph) const;$/;"	p	class:CycleFill	access:public	signature:(Graph) const
@@ -102,9 +142,16 @@ setColour	step.h	/^    void setColour(int);$/;"	p	class:Step	access:public	signa
 setLength	cycle.h	/^    void setLength(int);$/;"	p	class:Cycle	access:public	signature:(int)
 setLength	path.h	/^    void setLength(int);$/;"	p	class:Path	access:public	signature:(int)
 setLengths	cyclefill.h	/^    void setLengths(int []);$/;"	p	class:CycleFill	access:public	signature:(int [])
-steps	graph.h	/^    std::vector<Step *> steps;$/;"	m	class:Graph	access:public
-toAvoid	step.h	/^    std::set<int> toAvoid;$/;"	m	class:Step	access:private
+smallest	pathiterator.h	/^    int smallest;$/;"	m	class:PathIterator	access:private
+targetVert	pathiterator.h	/^    int targetVert;$/;"	m	class:PathIterator	access:private
+toAvoid	step.h	/^    std::array<int> toAvoid;$/;"	m	class:Step	access:private
+toFind	pathiterator.h	/^    bool toFind;$/;"	m	class:PathIterator	access:private
 toString	edge.cpp	/^std::string Edge::toString() const$/;"	f	class:Edge	signature:() const
-touches	edge.cpp	/^int Edge::touches(int v) const$/;"	f	class:Edge	signature:(int v) const
+toString	edge.h	/^    std::string toString() const;$/;"	p	class:Edge	access:public	signature:() const
+touches	edge.cpp	/^bool Edge::touches(int vert) const$/;"	f	class:Edge	signature:(int vert) const
 touches	edge.h	/^    bool touches(int) const;$/;"	p	class:Edge	access:public	signature:(int) const
 v	edge.h	/^    int v[2];$/;"	m	class:Edge	access:private
+validNextVert	pathiterator.cpp	/^bool PathIterator::validNextVert(int v) const$/;"	f	class:PathIterator	signature:(int v) const
+validNextVert	pathiterator.h	/^    bool validNextVert(int v) const;$/;"	p	class:PathIterator	access:private	signature:(int v) const
+~PathIterator	pathiterator.cpp	/^PathIterator::~PathIterator()$/;"	f	class:PathIterator	signature:()
+~PathIterator	pathiterator.h	/^    ~PathIterator();$/;"	p	class:PathIterator	access:public	signature:()

@@ -1,5 +1,8 @@
 #ifndef EDGE_H
 #define EDGE_H
+
+#include <string>
+
 class Edge
 {
   public:
@@ -7,6 +10,8 @@ class Edge
     bool touches(int) const;
     int other(int) const;
     int colour;
+
+    std::string toString() const;
 
 
   private:

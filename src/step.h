@@ -13,6 +13,6 @@ class Step
 
   private:
     int colour;
-    std::set<int> toAvoid;
+    std::array<int> toAvoid;
 }
 #endif /* STEP_H */

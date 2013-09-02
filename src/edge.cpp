@@ -1,24 +1,26 @@
-#include <string>
+#include "edge.h"
 
-Edge::Edge(int[] v)
+#include <sstream>
+
+Edge::Edge(int v0, int v1)
 {
-  this.v[0] = v[0];
-  this.v[1] = v[1];
-  this.colour = 0;
+  this->v[0] = v0;
+  this->v[1] = v1;
+  this->colour = 0;
 }
 
-int Edge::touches(int v) const
+bool Edge::touches(int vert) const
 {
-  if (v == v[0])
+  if (vert == v[0])
     return true;
-  if (v == v[1])
+  if (vert == v[1])
     return true;
   return false;
 }
 
-int Edge::other(int v) const
+int Edge::other(int vert) const
 {
-  if (v == v[0])
+  if (vert == v[0])
     return v[1];
   return v[0];
 }
@@ -26,7 +28,7 @@ int Edge::other(int v) const
 std::string Edge::toString() const
 {
   std::ostringstream s;
-  s << "{" << this.v[0] << "," << this.v[1] << "}";
+  s << "{" << this->v[0] << "," << this->v[1] << "}";
   std::string str = s.str();
   return str;
 }
