@@ -4,10 +4,11 @@
 class Cycle : public Step
 {
   public:
-    Cycle();
-    void setLength(int);
-    void run(Graph) const;
+    Cycle(Graph *g, std::vector<int> avoid, int length, int colour, int start=0);
+    void run();
   private:
     int length;
-}
+    int start;
+    int colour;
+};
 #endif /* CYCLE_H */

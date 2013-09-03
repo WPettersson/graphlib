@@ -4,10 +4,16 @@
 class CycleFill : public Step
 {
   public:
-    CycleFill();
-    void setLengths(int []);
-    void run(Graph) const;
+    CycleFill(Graph *g, std::vector<int> avoid, std::vector<int> lengths,
+        int colour, bool sorted=false);
+    void run();
   private:
-    std::vector<int> lengths;
-}
+    int *lengths;
+    int count;
+    bool *completed;
+    int numberDone;
+    int colour;
+
+    bool firstRun;
+};
 #endif /* CYCLEFILL_H */

@@ -1,25 +1,22 @@
 #include "pathiterator.h"
 #include "graph.h"
 
-PathIterator::PathIterator(const Graph *g, int now, int target, int length, 
-    bool *avoid, int smallest = 0)
-{
-  this->graph = g;
-  this->length = length;
-  // Check for valid length (>0).
-  if (length == 0)
-    this->last = true;
-  else
-    this->last = false;
-  this->nowVert = now;
-  this->targetVert = target;
-  this->nextEdgeIndex = 0;
-  this->avoid = avoid;
-  this->avoid[nowVert] = true;
-  this->smallest = smallest;
-  this->nextPaths = NULL;
+#include <iostream>
 
-  this->toFind = true;
+PathIterator::PathIterator(const Graph *g, int now, int target, int length, 
+    bool *avoid, int smallest) : graph(g), length(length), nowVert(now),
+    targetVert(target), smallest(smallest), avoid(avoid), nextEdgeIndex(0),
+    last(false), toFind(true), nextPaths(NULL), doneClose(false)
+{
+  this->avoid[nowVert] = true;
+
+//  std::cout << "Finding path from " << nowVert << " to " << targetVert << " with length " << length << std::endl;
+//  std::cout << "Smallest " << smallest << std::endl;
+//  for (int i = 0; i < 23; i++)
+//    if (avoid[i])
+//      std::cout << i << " ";
+//  std::cout << std::endl;
+//  std::cout << graph->toString();
 }
 
 PathIterator::~PathIterator()
@@ -42,19 +39,21 @@ bool PathIterator::findNext()
 {
   if (last)
     return false;
-  else if (length == 1)
+  if ((length == 1) || (length == 0 && doneClose == false))
   {
     Edge *e = graph->getEdge(nowVert, targetVert);
-    if (e != NULL)
+    if (e != NULL && e->colour == 0)
     {
-      last = true;
+      if (length == 1)
+        last = true;
+      if (length == 0)
+        doneClose = true;
       nextPath.clear();
       nextPath.push_back(e);
       return true;
     }
-    return false;
   }
-  else
+  if (length != 1)
   {
     if (nextPaths)
     {
@@ -78,9 +77,10 @@ bool PathIterator::findNext()
       if (nextEdge->colour != 0) 
         continue;
       nextVert = nextEdge->other(nowVert);
-      if (!validNextVert(nextVert))
+      if (!validNextVert(nextVert) || (nextVert == targetVert))
         continue;
-      nextPaths = new PathIterator(graph, nextVert, targetVert, length-1, avoid,
+      int nextLength = (length==0) ? 0 : length-1;
+      nextPaths = new PathIterator(graph, nextVert, targetVert, nextLength, avoid,
           smallest);
       if (nextPaths->hasNext())
       {
@@ -94,8 +94,9 @@ bool PathIterator::findNext()
         nextPaths = NULL;
       }
     }
-    return false;
   }
+  last = true;
+  return false;
 }
 
 bool PathIterator::hasNext()

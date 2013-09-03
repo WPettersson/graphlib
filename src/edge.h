@@ -10,12 +10,12 @@ class Edge
     bool touches(int) const;
     int other(int) const;
     int colour;
+    int length() const;
 
     std::string toString() const;
 
-
-  private:
     int v[2];
+
 };
 
 #endif /* EDGE_H */

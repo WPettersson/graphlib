@@ -1,18 +1,23 @@
 #ifndef STEP_H
 #define STEP_H
 
-#include "graph.h"
+#include <list>
+#include <vector>
+
+class Graph;
 
 class Step
 {
   public:
-    Step();
-    virtual void run(Graph) const;
+    Step(Graph *g, std::vector<int> avoid, int colour);
+    ~Step();
+    virtual void run() = 0;
     void setColour(int);
-    void avoid(int[]);
 
-  private:
+  protected:
+    Graph *graph;
     int colour;
-    std::array<int> toAvoid;
-}
+    std::list<int> avoidedNow;
+    bool *avoid;
+};
 #endif /* STEP_H */
