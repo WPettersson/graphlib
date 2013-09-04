@@ -12,7 +12,6 @@ class CycleFill : public Step
     int count;
     bool *completed;
     int numberDone;
-    int colour;
 
     bool firstRun;
 };

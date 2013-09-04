@@ -16,6 +16,7 @@ class Graph
     Edge *getEdge(int, int) const;
     void addEdge(int, int);
     void addEdgeRange(int, int, int length);
+    void colourEdge(int, int, int);
     void colourPath(std::vector<Edge *> path, int colour);
     void unColourPath(std::vector<Edge *> path);
     bool vertColoured(int vert, int colour) const;
@@ -26,6 +27,7 @@ class Graph
     void setCheckpoint(int seconds);
     std::string toString() const;
     void writeAsy() const;
+    void writeTxt() const;
 
     void addStep(Step *s);
 

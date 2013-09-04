@@ -52,6 +52,11 @@ void Graph::addEdgeRange(int v1, int v2, int length)
     addEdge(i,i+length);
 }
 
+void Graph::colourEdge(int v1, int v2, int colour)
+{
+  getEdge(v1,v2)->colour = colour;
+}
+
 bool Graph::vertColoured(int vert, int colour) const
 {
   for (Edge *e: edgeAdjacency[vert])
@@ -159,21 +164,21 @@ std::string Graph::toString() const
     if (e->colour > maxColour)
       maxColour = e->colour;
   }
-  for (int i = 0; i <= maxColour; i++)
+  for (int i = 1; i <= maxColour; i++)
   {
-    str << "Colour " << i << ": [";
+    str << i << " = (";
     bool first = true;
     for (Edge *e: allEdges)
     {
       if (e->colour == i)
       {
         if (! first)
-          str << ", ";
+          str << ",";
         first = false;
         str << e->toString();
       }
     }
-    str << "]" << std::endl;
+    str << ")" << std::endl;
   }
   return str.str();
 }
@@ -192,5 +197,12 @@ void Graph::writeAsy() const
     ofile << "edge (" << e->v[0] << "," << e->v[1] << ",getPen(" << e->colour << "));" << std::endl;
   }
   ofile << "shipout(bbox(white,Fill));" << std::endl;
+  ofile.close();
+}
+
+void Graph::writeTxt() const
+{
+  std::ofstream ofile(name + ".txt");
+  ofile << toString();
   ofile.close();
 }
