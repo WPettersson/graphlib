@@ -7,6 +7,7 @@ set(LIBDIR ${CMAKE_INSTALL_PREFIX}/lib)
 set(INCLUDEDIR ${CMAKE_INSTALL_PREFIX}/include/${PACKAGE_NAME})
 
 add_subdirectory(src)
+add_subdirectory(tools)
 
 #find_package(Boost 1.45.0 COMPONENTS python)
 #find_package(PythonLibs)
