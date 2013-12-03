@@ -1,6 +1,9 @@
 add_executable("do_path" "do_path.cpp")
 target_link_libraries("do_path" "graphlib")
 
+add_executable("do_end" "do_end.cpp")
+target_link_libraries("do_end" "graphlib")
+
 add_executable("do_cycles" "do_cycles.cpp")
 target_link_libraries("do_cycles" "graphlib")
 
