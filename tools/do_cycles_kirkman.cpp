@@ -1,5 +1,5 @@
 #include <sstream>
-#include <iostream>
+//#include <iostream>
 
 #include "graph.h"
 #include "edge.h"
@@ -35,7 +35,6 @@ int main(int argc, char** argv)
   std::string name = stream.str();
   if (name[name.length()-1] == ',')
     name.pop_back();
-  std::cout << "Doing " << name << std::endl;
   int nVerts = n+7;
   Graph g(nVerts, name);
   g.addEdge(1,2);

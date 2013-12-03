@@ -1,5 +1,5 @@
 #include <sstream>
-#include <iostream>
+//#include <iostream>
 
 #include "graph.h"
 #include "cyclefill.h"
@@ -14,7 +14,7 @@ void callback(Graph *g)
   g->writeAsy();
   g->writeTxt();
   g->finish();
-  std::cout << "Found " << count++ << std::endl;
+  //std::cout << "Found " << count++ << std::endl;
   //std::cin.ignore();
   result = 0;
 }
