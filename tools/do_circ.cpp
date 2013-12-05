@@ -86,7 +86,7 @@ int main(int argc, char** argv)
   for (int colour = 0; colour < 7; colour++)
   {
     std::vector<int> av;
-    Step *s = new CycleFill(&g, av, cycles, colour+1, false, false);
+    Step *s = new CycleFill(&g, av, cycles, colour+1, false);
     g.addStep(s);
   }
   g.setCallback(&callback);
