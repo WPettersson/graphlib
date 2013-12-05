@@ -108,7 +108,8 @@ void Graph::doNextStep()
       if (++i == steps.size())
         rampingUp = false;
     }
-    checkpoint[stepCount+1] = 0;
+    if (stepCount+1 < steps.size())
+      checkpoint[stepCount+1] = 0;
     if (clock() - lastChk > chkTimeInterval)
     {
       lastChk = clock();
