@@ -155,7 +155,7 @@ void Graph::loadCheckpoint()
   ifile.close();
 }
 
-std::string Graph::toString() const
+std::string Graph::toString(int start) const
 {
   std::stringstream str;
   int maxColour = 0;
@@ -164,7 +164,7 @@ std::string Graph::toString() const
     if (e->colour > maxColour)
       maxColour = e->colour;
   }
-  for (int i = 1; i <= maxColour; i++)
+  for (int i = start; i <= maxColour; i++)
   {
     str << i << " = (";
     bool first = true;
@@ -197,6 +197,13 @@ void Graph::writeAsy() const
     ofile << "edge (" << e->v[0] << "," << e->v[1] << ",getPen(" << e->colour << "));" << std::endl;
   }
   ofile << "shipout(bbox(white,Fill));" << std::endl;
+  ofile.close();
+}
+
+void Graph::writeTxtAll() const
+{
+  std::ofstream ofile(name + ".txt");
+  ofile << toString(0); // Also write non-used edges
   ofile.close();
 }
 

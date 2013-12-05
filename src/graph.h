@@ -25,9 +25,10 @@ class Graph
     void run();
     void setCallback( void (*func)(Graph *));
     void setCheckpoint(int seconds);
-    std::string toString() const;
+    std::string toString(int start=1) const;
     void writeAsy() const;
     void writeTxt() const;
+    void writeTxtAll() const;
 
     void addStep(Step *s);
 
