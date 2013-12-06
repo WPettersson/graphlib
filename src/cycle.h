@@ -11,5 +11,6 @@ class Cycle : public Step
     int length;
     int start;
     int colour;
+    bool lowest;
 };
 #endif /* CYCLE_H */
