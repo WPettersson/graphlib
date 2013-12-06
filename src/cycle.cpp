@@ -12,7 +12,7 @@ Cycle::Cycle(Graph *g, std::vector<int> avoid, int length, int colour,
 
 void Cycle::run()
 {
-  for (unsigned int v = 0; v <= (graph->nVerts-length); v++)
+  for (unsigned int v = start; v <= (graph->nVerts-length); v++)
   {
     if (avoid[v])
       continue;
