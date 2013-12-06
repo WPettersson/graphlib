@@ -10,6 +10,9 @@ target_link_libraries("do_cycles" "graphlib")
 add_executable("do_circ" "do_circ.cpp")
 target_link_libraries("do_circ" "graphlib")
 
+add_executable("do_twofactor" "do_twofactor.cpp")
+target_link_libraries("do_twofactor" "graphlib")
+
 add_executable("do_cycles_kirkman" "do_cycles_kirkman.cpp")
 target_link_libraries("do_cycles_kirkman" "graphlib")
 
