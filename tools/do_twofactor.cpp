@@ -1,4 +1,5 @@
 #include <sstream>
+#include <csignal>
 
 #include "graph.h"
 #include "edge.h"
@@ -7,12 +8,19 @@
 int result;
 const int SECONDS_IN_MINUTE = 60;
 
-void callback(Graph *g)
+Graph *g;
+
+void callback(Graph *graph)
+{
+  graph->writeAsy();
+  graph->writeTxt();
+  graph->finish();
+  result = 0;
+}
+
+void status(int parameter)
 {
   g->writeAsy();
-  g->writeTxt();
-  g->finish();
-  result = 0;
 }
 
 int main(int argc, char** argv)
@@ -36,62 +44,66 @@ int main(int argc, char** argv)
     name.pop_back();
 
   int nVerts = n;
-  Graph g(nVerts, name);
-  g.addEdgeRange(0,n-2,1);
-  g.addEdge(n-1,0);
+  g = new Graph(nVerts, name);
+  g->addEdgeRange(0,n-2,1);
+  g->addEdge(n-1,0);
 
-  g.addEdgeRange(0,n-3,2);
-  g.addEdge(n-2,0);
-  g.addEdge(n-1,1);
+  g->addEdgeRange(0,n-3,2);
+  g->addEdge(n-2,0);
+  g->addEdge(n-1,1);
 
-  g.addEdgeRange(0,n-4,3);
-  g.addEdge(n-3,0);
-  g.addEdge(n-2,1);
-  g.addEdge(n-1,2);
+  g->addEdgeRange(0,n-4,3);
+  g->addEdge(n-3,0);
+  g->addEdge(n-2,1);
+  g->addEdge(n-1,2);
 
-  g.addEdgeRange(0,n-5,4);
-  g.addEdge(n-4,0);
-  g.addEdge(n-3,1);
-  g.addEdge(n-2,2);
-  g.addEdge(n-1,3);
+  g->addEdgeRange(0,n-5,4);
+  g->addEdge(n-4,0);
+  g->addEdge(n-3,1);
+  g->addEdge(n-2,2);
+  g->addEdge(n-1,3);
 
-  g.addEdgeRange(0,n-6,5);
-  g.addEdge(n-5,0);
-  g.addEdge(n-4,1);
-  g.addEdge(n-3,2);
-  g.addEdge(n-2,3);
-  g.addEdge(n-1,4);
+  g->addEdgeRange(0,n-6,5);
+  g->addEdge(n-5,0);
+  g->addEdge(n-4,1);
+  g->addEdge(n-3,2);
+  g->addEdge(n-2,3);
+  g->addEdge(n-1,4);
 
-  g.addEdgeRange(0,n-7,6);
-  g.addEdge(n-6,0);
-  g.addEdge(n-5,1);
-  g.addEdge(n-4,2);
-  g.addEdge(n-3,3);
-  g.addEdge(n-2,4);
-  g.addEdge(n-1,5);
+  g->addEdgeRange(0,n-7,6);
+  g->addEdge(n-6,0);
+  g->addEdge(n-5,1);
+  g->addEdge(n-4,2);
+  g->addEdge(n-3,3);
+  g->addEdge(n-2,4);
+  g->addEdge(n-1,5);
   
-  g.addEdgeRange(0,n-8,7);
-  g.addEdge(n-7,0);
-  g.addEdge(n-6,1);
-  g.addEdge(n-5,2);
-  g.addEdge(n-4,3);
-  g.addEdge(n-3,4);
-  g.addEdge(n-2,5);
-  g.addEdge(n-1,6);
+  g->addEdgeRange(0,n-8,7);
+  g->addEdge(n-7,0);
+  g->addEdge(n-6,1);
+  g->addEdge(n-5,2);
+  g->addEdge(n-4,3);
+  g->addEdge(n-3,4);
+  g->addEdge(n-2,5);
+  g->addEdge(n-1,6);
 
   for (int cycle: cycles)
   {
     for (int colour = 0; colour < 7; colour++)
     {
       std::vector<int> av;
-      Step *s = new Cycle(&g, av, cycle, colour+1, 0, true);
-      g.addStep(s);
+      Step *s = new Cycle(g, av, cycle, colour+1, 0, true);
+      g->addStep(s);
     }
   }
-  g.setCallback(&callback);
-  g.setCheckpoint(30);
-  g.writeTxtAll();
-  g.run();
+  g->setCallback(&callback);
+  g->setCheckpoint(30);
+
+  void (*prev_fn)(int);
+  prev_fn = signal (SIGUSR1, status);
+  if (prev_fn==SIG_IGN) signal (SIGUSR1, SIG_IGN);
+
+  g->run();
   return result;
 }
 
