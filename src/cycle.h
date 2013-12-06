@@ -10,7 +10,6 @@ class Cycle : public Step
   private:
     int length;
     int start;
-    int colour;
     bool lowest;
 };
 #endif /* CYCLE_H */
