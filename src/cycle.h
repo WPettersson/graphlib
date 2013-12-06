@@ -4,7 +4,8 @@
 class Cycle : public Step
 {
   public:
-    Cycle(Graph *g, std::vector<int> avoid, int length, int colour, int start=0);
+    Cycle(Graph *g, std::vector<int> avoid, int length, int colour, int
+        start=0, bool lowest=false);
     void run();
   private:
     int length;

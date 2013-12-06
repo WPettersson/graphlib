@@ -5,7 +5,8 @@
 #include <iostream>
 
 Cycle::Cycle(Graph *g, std::vector<int> avoid, int length, int colour,
-    int start) : Step(g, avoid, colour), length(length), start(start)
+    int start, bool lowest) : Step(g, avoid, colour), length(length),
+    start(start), lowest(lowest)
 {
 
 }
@@ -35,6 +36,9 @@ void Cycle::run()
         graph->unColourPath(path);
       }
     }
+    // If we're only looking on the lowest vertex, then this failed.
+    if (lowest)
+      return;
   }
 }
 
