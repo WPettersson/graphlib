@@ -208,6 +208,112 @@ void Graph::writeTxtAll() const
   ofile.close();
 }
 
+bool Graph::twoFactorTriangle(unsigned int i, bool empty)
+{
+  if (i == nVerts)
+    return true;
+  std::vector<Edge *> adj = edgeAdjacency[i];
+  unsigned int numCols = adj.size()/2;
+  bool used[numCols];
+  for(unsigned int j = 0; j < numCols; j++)
+    used[j]=false;
+  for(Edge *e: adj)
+    used[e->colour] = true;
+  unsigned int col;
+  for(col = 1; col <= numCols; col++)
+    if (used[col]==false)
+      break;
+  if (col == numCols+1)
+    return twoFactorTriangle(i+1);
+  for (unsigned int start = 0; start <  (adj.size()-1) ; start++)
+  {
+    Edge *startE = adj[start];
+    if (startE->colour != 0)
+      continue;
+    int A = startE->other(i);
+    bool badStart = false;
+    for (Edge *e: edgeAdjacency[A])
+    {
+      if (e->colour == (signed)col)
+      {
+        badStart = true;
+        break;
+      }
+    }
+    if (badStart)
+        continue;
+    for (unsigned int end = start+1; end < adj.size() ; end++)
+    {
+      Edge *endE = adj[end];
+      if (endE->colour != 0)
+        continue;
+      int B = endE->other(i);
+      bool badEnd = false;
+      for (Edge *e: edgeAdjacency[B])
+      {
+        if (e->colour == (signed)col)
+        {
+          badEnd = true;
+          break;
+        }
+      }
+      if (badEnd)
+        continue;
+      Edge *third = getEdge(A,B);
+      if (third == NULL)
+        continue;
+      if (third->colour != 0)
+        continue;
+      int sum = 0;
+      signed int C = i;
+      signed int maxDist = (nVerts+1)/2;
+      signed int snVerts = nVerts;
+      if ( (C-A > -maxDist) && (C-A < maxDist) )
+        sum+= C-A;
+      else if ( (C+snVerts - A > -maxDist) && (C+snVerts - A < maxDist) )
+        sum+= C+snVerts-A;
+      else if ( (C-snVerts - A > -maxDist) && (C-snVerts - A < maxDist) )
+        sum+= C-snVerts-A;
+
+      if ( (B-C > -maxDist) && (B-C < +maxDist) )
+        sum+= B-C;
+      else if ( (B+snVerts - C > -maxDist) && (B+snVerts - C < maxDist) )
+        sum+= B+snVerts-C;
+      else if ( (B-snVerts - C > -maxDist) && (B-snVerts - C < maxDist) )
+        sum+= B-snVerts-C;
+
+      if ( (A-B > -maxDist) && (A-B < maxDist) )
+        sum+= A-B;
+      else if ( (A+snVerts - B > -maxDist) && (A+snVerts - B < maxDist) )
+        sum+= A+snVerts-B;
+      else if ( (A-snVerts - B > -maxDist) && (A-snVerts - B < maxDist) )
+        sum+= A-snVerts-B;
+
+      if (sum != 0)
+        continue;
+
+      colourEdge(i,A,col);
+      colourEdge(i,B,col);
+      colourEdge(A,B,col);
+      //std::cout << "Did " << i << "," << A << "," << B << " in " << col << std::endl;
+      if (twoFactorTriangle(i,empty))
+        return true;
+      //std::cout << "Undid " << i << "," << A << "," << B << " in " << col << std::endl;
+      colourEdge(i,A,0);
+      colourEdge(i,B,0);
+      colourEdge(A,B,0);
+    }
+    if (i == 0 && empty)
+      return false; // If we're on the first vertex, every edge must be used in some two-factor, so trying other "starting" vertices is equivalent to changing colours.
+  }
+  return false;
+}
+
+
+
+
+
+
 void Graph::writeTxt() const
 {
   std::ofstream ofile(name + ".txt");

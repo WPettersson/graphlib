@@ -29,6 +29,7 @@ class Graph
     void writeAsy() const;
     void writeTxt() const;
     void writeTxtAll() const;
+    bool twoFactorTriangle(unsigned int i=0, bool empty=false);
 
     void addStep(Step *s);
 
