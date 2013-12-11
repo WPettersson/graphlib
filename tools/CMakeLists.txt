@@ -13,6 +13,9 @@ target_link_libraries("do_circ" "graphlib")
 add_executable("do_twofactor" "do_twofactor.cpp")
 target_link_libraries("do_twofactor" "graphlib")
 
+add_executable("do_twofactor_triangle" "do_twofactor_triangle.cpp")
+target_link_libraries("do_twofactor_triangle" "graphlib")
+
 add_executable("do_cycles_kirkman" "do_cycles_kirkman.cpp")
 target_link_libraries("do_cycles_kirkman" "graphlib")
 
