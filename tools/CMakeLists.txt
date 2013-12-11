@@ -7,6 +7,9 @@ target_link_libraries("do_end" "graphlib")
 add_executable("do_cycles" "do_cycles.cpp")
 target_link_libraries("do_cycles" "graphlib")
 
+add_executable("do_cycles_b" "do_cycles_b.cpp")
+target_link_libraries("do_cycles_b" "graphlib")
+
 add_executable("do_circ" "do_circ.cpp")
 target_link_libraries("do_circ" "graphlib")
 
