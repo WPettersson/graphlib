@@ -208,23 +208,45 @@ void Graph::writeTxtAll() const
   ofile.close();
 }
 
-bool Graph::twoFactorTriangle(unsigned int i, bool empty)
+bool Graph::twoFactorTriangle(unsigned int i, bool empty, unsigned int avoid[][7])
 {
   if (i == nVerts)
     return true;
   std::vector<Edge *> adj = edgeAdjacency[i];
   unsigned int numCols = adj.size()/2;
-  bool used[numCols];
-  for(unsigned int j = 0; j < numCols; j++)
+  numCols = 7;
+  bool used[numCols+1];
+  for(unsigned int j = 1; j <= numCols; j++)
     used[j]=false;
   for(Edge *e: adj)
     used[e->colour] = true;
   unsigned int col;
   for(col = 1; col <= numCols; col++)
+  {
     if (used[col]==false)
+    {
+      bool badColour = false;
+      if (avoid != NULL)
+      {
+        for (int j=0; j< 7; j++)
+        {
+          if (avoid[col-1][j] == i)
+          {
+            badColour = true;
+            break;
+          }
+        }
+      }
+      if (badColour)
+        continue;
       break;
+    }
+  }
   if (col == numCols+1)
-    return twoFactorTriangle(i+1);
+  {
+    if (twoFactorTriangle(i+1, empty, avoid))
+      return true;
+  }
   for (unsigned int start = 0; start <  (adj.size()-1) ; start++)
   {
     Edge *startE = adj[start];
@@ -296,7 +318,7 @@ bool Graph::twoFactorTriangle(unsigned int i, bool empty)
       colourEdge(i,B,col);
       colourEdge(A,B,col);
       //std::cout << "Did " << i << "," << A << "," << B << " in " << col << std::endl;
-      if (twoFactorTriangle(i,empty))
+      if (twoFactorTriangle(i,empty,avoid))
         return true;
       //std::cout << "Undid " << i << "," << A << "," << B << " in " << col << std::endl;
       colourEdge(i,A,0);
