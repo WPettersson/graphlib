@@ -13,6 +13,7 @@ class Step
     ~Step();
     virtual void run() = 0;
     void setColour(int);
+    void updateAvoid();
 
   protected:
     Graph *graph;

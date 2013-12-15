@@ -10,8 +10,12 @@ Step::Step(Graph *g, std::vector<int> _avoid, int colour) : graph(g), colour(col
 
   for (int a: _avoid)
     avoid[a] = true;
+  updateAvoid();
+}
 
-  for (Edge *e: g->allEdges)
+void Step::updateAvoid()
+{
+  for (Edge *e: graph->allEdges)
   {
     if (e->colour == colour)
     {
