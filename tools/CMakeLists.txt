@@ -10,8 +10,14 @@ target_link_libraries("do_cycles" "graphlib")
 add_executable("do_cycles_b" "do_cycles_b.cpp")
 target_link_libraries("do_cycles_b" "graphlib")
 
+add_executable("do_cycles_c" "do_cycles_c.cpp")
+target_link_libraries("do_cycles_c" "graphlib")
+
 add_executable("do_cycles_b3" "do_cycles_b3.cpp")
 target_link_libraries("do_cycles_b3" "graphlib")
+
+add_executable("do_cycles_c3" "do_cycles_c3.cpp")
+target_link_libraries("do_cycles_c3" "graphlib")
 
 add_executable("do_circ" "do_circ.cpp")
 target_link_libraries("do_circ" "graphlib")
