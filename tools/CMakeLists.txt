@@ -19,6 +19,18 @@ target_link_libraries("do_cycles_b3" "graphlib")
 add_executable("do_cycles_c3" "do_cycles_c3.cpp")
 target_link_libraries("do_cycles_c3" "graphlib")
 
+add_executable("do_cycles_d3" "do_cycles_d3.cpp")
+target_link_libraries("do_cycles_d3" "graphlib")
+
+add_executable("do_cycles_e3" "do_cycles_e3.cpp")
+target_link_libraries("do_cycles_e3" "graphlib")
+
+add_executable("do_cycles_f3" "do_cycles_f3.cpp")
+target_link_libraries("do_cycles_f3" "graphlib")
+
+add_executable("do_cycles_g3" "do_cycles_g3.cpp")
+target_link_libraries("do_cycles_g3" "graphlib")
+
 add_executable("do_circ" "do_circ.cpp")
 target_link_libraries("do_circ" "graphlib")
 
@@ -30,5 +42,11 @@ target_link_libraries("do_twofactor_triangle" "graphlib")
 
 add_executable("do_cycles_kirkman" "do_cycles_kirkman.cpp")
 target_link_libraries("do_cycles_kirkman" "graphlib")
+
+add_executable("do_lots_threes" "do_lots_threes.cpp")
+target_link_libraries("do_lots_threes" "graphlib")
+
+add_executable("do_twofactor_J" "do_twofactor_J.cpp")
+target_link_libraries("do_twofactor_J" "graphlib")
 
 include_directories("${CMAKE_SOURCE_DIR}/src")
