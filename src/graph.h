@@ -66,6 +66,7 @@ class Graph
     friend class Step;
     friend class Cycle;
     friend class CycleFill;
+    friend class TwoFactor;
     friend class Path;
 };
 

@@ -9,7 +9,7 @@ class Graph;
 class Step
 {
   public:
-    Step(Graph *g, std::vector<int> avoid, int colour);
+    Step(Graph *g, std::vector<int> avoid, int colour = -1);
     ~Step();
     virtual void run() = 0;
     void setColour(int);

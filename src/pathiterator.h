@@ -10,7 +10,7 @@ class PathIterator
 {
   public:
     PathIterator(const Graph *g, int now, int target, int length, 
-        bool avoid[], int smallest = 0);
+        bool avoid[], int smallest = 0, int avoidColour = 0);
     bool hasNext();
     std::vector<Edge *> next();
 
@@ -32,14 +32,15 @@ class PathIterator
     int nextVert;
     Edge *nextEdge;
     bool last;
-    
+
     bool toFind;
     bool found;
-    
+
     PathIterator *nextPaths;
     std::vector<Edge *> nextPath;
 
     bool doneClose;
+    int avoidColour;
 
 };
 

@@ -3,10 +3,11 @@
 
 #include <iostream>
 
-PathIterator::PathIterator(const Graph *g, int now, int target, int length, 
-    bool *avoid, int smallest) : graph(g), length(length), nowVert(now),
-    targetVert(target), smallest(smallest), avoid(avoid), nextEdgeIndex(0),
-    last(false), toFind(true), nextPaths(NULL), doneClose(false)
+PathIterator::PathIterator(const Graph *g, int now, int target, int length,
+    bool *avoid, int smallest, int avoidColour) : graph(g), length(length),
+    nowVert(now), targetVert(target), smallest(smallest), avoid(avoid),
+    nextEdgeIndex(0), last(false), toFind(true), nextPaths(NULL),
+    doneClose(false), avoidColour(avoidColour)
 {
   this->avoid[nowVert] = true;
 
@@ -32,6 +33,14 @@ bool PathIterator::validNextVert(int v) const
     return false;
   if (v == targetVert)
     return false;
+  if (avoidColour != 0)
+  {
+    for(Edge *e: graph->edgeAdjacency[v])
+    {
+      if (e->colour == avoidColour)
+        return false;
+    }
+  }
   return true;
 }
 

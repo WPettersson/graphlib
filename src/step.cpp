@@ -7,7 +7,6 @@ Step::Step(Graph *g, std::vector<int> _avoid, int colour) : graph(g), colour(col
   this->avoid = new bool[graph->nVerts];
   for (unsigned int i = 0; i < graph->nVerts; i++)
     avoid[i] = false;
-
   for (int a: _avoid)
     avoid[a] = true;
   updateAvoid();
@@ -15,19 +14,22 @@ Step::Step(Graph *g, std::vector<int> _avoid, int colour) : graph(g), colour(col
 
 void Step::updateAvoid()
 {
-  for (Edge *e: graph->allEdges)
+  if (colour > 0)
   {
-    if (e->colour == colour)
+    for (Edge *e: graph->allEdges)
     {
-      if (!avoid[e->v[1]])
+      if (e->colour == colour)
       {
-        avoidedNow.push_back(e->v[1]);
-        avoid[e->v[1]] = true;
-      }
-      if (!avoid[e->v[2]])
-      {
-        avoidedNow.push_back(e->v[2]);
-        avoid[e->v[2]] = true;
+        if (!avoid[e->v[1]])
+        {
+          avoidedNow.push_back(e->v[1]);
+          avoid[e->v[1]] = true;
+        }
+        if (!avoid[e->v[2]])
+        {
+          avoidedNow.push_back(e->v[2]);
+          avoid[e->v[2]] = true;
+        }
       }
     }
   }
