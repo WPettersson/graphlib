@@ -1,52 +1,7 @@
-add_executable("do_path" "do_path.cpp")
-target_link_libraries("do_path" "graphlib")
+SET(PROGS do_path do_end do_cycles do_cycles_b do_cycles_c do_cycles_b3 do_cycles_c3 do_cycles_d3 do_cycles_e3 do_cycles_f3 do_cycles_g3 do_circ do_twofactor do_twofactor_triangle do_cycles_kirkman do_lots_threes do_twofactor_J do_path_333)
 
-add_executable("do_end" "do_end.cpp")
-target_link_libraries("do_end" "graphlib")
-
-add_executable("do_cycles" "do_cycles.cpp")
-target_link_libraries("do_cycles" "graphlib")
-
-add_executable("do_cycles_b" "do_cycles_b.cpp")
-target_link_libraries("do_cycles_b" "graphlib")
-
-add_executable("do_cycles_c" "do_cycles_c.cpp")
-target_link_libraries("do_cycles_c" "graphlib")
-
-add_executable("do_cycles_b3" "do_cycles_b3.cpp")
-target_link_libraries("do_cycles_b3" "graphlib")
-
-add_executable("do_cycles_c3" "do_cycles_c3.cpp")
-target_link_libraries("do_cycles_c3" "graphlib")
-
-add_executable("do_cycles_d3" "do_cycles_d3.cpp")
-target_link_libraries("do_cycles_d3" "graphlib")
-
-add_executable("do_cycles_e3" "do_cycles_e3.cpp")
-target_link_libraries("do_cycles_e3" "graphlib")
-
-add_executable("do_cycles_f3" "do_cycles_f3.cpp")
-target_link_libraries("do_cycles_f3" "graphlib")
-
-add_executable("do_cycles_g3" "do_cycles_g3.cpp")
-target_link_libraries("do_cycles_g3" "graphlib")
-
-add_executable("do_circ" "do_circ.cpp")
-target_link_libraries("do_circ" "graphlib")
-
-add_executable("do_twofactor" "do_twofactor.cpp")
-target_link_libraries("do_twofactor" "graphlib")
-
-add_executable("do_twofactor_triangle" "do_twofactor_triangle.cpp")
-target_link_libraries("do_twofactor_triangle" "graphlib")
-
-add_executable("do_cycles_kirkman" "do_cycles_kirkman.cpp")
-target_link_libraries("do_cycles_kirkman" "graphlib")
-
-add_executable("do_lots_threes" "do_lots_threes.cpp")
-target_link_libraries("do_lots_threes" "graphlib")
-
-add_executable("do_twofactor_J" "do_twofactor_J.cpp")
-target_link_libraries("do_twofactor_J" "graphlib")
-
-include_directories("${CMAKE_SOURCE_DIR}/src")
+INCLUDE_DIRECTORIES("${PROJECT_SOURCE_DIR}/src")
+FOREACH(PROG ${PROGS})
+  ADD_EXECUTABLE(${PROG} "${PROG}.cpp")
+  TARGET_LINK_LIBRARIES(${PROG} "graphlib")
+ENDFOREACH(PROG)
