@@ -110,7 +110,7 @@ void Graph::doNextStep()
     }
     if (stepCount+1 < steps.size())
       checkpoint[stepCount+1] = 0;
-    if (clock() - lastChk > chkTimeInterval)
+    if (!rampingUp && (clock() - lastChk > chkTimeInterval))
     {
       lastChk = clock();
       saveCheckpoint();
