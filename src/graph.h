@@ -26,9 +26,9 @@ class Graph
     void setCallback( void (*func)(Graph *));
     void setCheckpoint(int seconds);
     std::string toString(int start=1) const;
-    void writeAsy() const;
-    void writeTxt() const;
-    void writeTxtAll() const;
+    void writeAsy(std::string suffix="") const;
+    void writeTxt(std::string suffix="") const;
+    void writeTxtAll(std::string suffix="") const;
     bool twoFactorTriangle(unsigned int i=0, bool empty=false, unsigned int avoid[][7]=NULL);
 
     void addStep(Step *s);

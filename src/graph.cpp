@@ -189,9 +189,9 @@ void Graph::addStep(Step *s)
   steps.push_back(s);
 }
 
-void Graph::writeAsy() const
+void Graph::writeAsy(std::string suffix) const
 {
-  std::ofstream ofile(name + ".asy");
+  std::ofstream ofile(name + suffix + ".asy");
   ofile << "import Jn;" << std::endl << "init(" << nVerts << ");" << std::endl;
   for (Edge *e: allEdges)
   {
@@ -201,9 +201,9 @@ void Graph::writeAsy() const
   ofile.close();
 }
 
-void Graph::writeTxtAll() const
+void Graph::writeTxtAll(std::string suffix) const
 {
-  std::ofstream ofile(name + ".txt");
+  std::ofstream ofile(name + suffix + ".txt");
   ofile << toString(0); // Also write non-used edges
   ofile.close();
 }
@@ -336,9 +336,9 @@ bool Graph::twoFactorTriangle(unsigned int i, bool empty, unsigned int avoid[][7
 
 
 
-void Graph::writeTxt() const
+void Graph::writeTxt(std::string suffix) const
 {
-  std::ofstream ofile(name + ".txt");
+  std::ofstream ofile(name + suffix + ".txt");
   ofile << toString();
   ofile.close();
 }
