@@ -33,6 +33,23 @@ void Graph::run()
     checkpoint[i] = 0;
   loadCheckpoint();
   lastChk = clock();
+  if (checkpointing)
+  {
+    checkpoint[stepCount]+=1;
+    unsigned int i = stepCount;
+    while (rampingUp && checkpoint[i] == rampTo[i])
+    {
+      if (++i == steps.size())
+        rampingUp = false;
+    }
+    if (stepCount+1 < steps.size())
+      checkpoint[stepCount+1] = 0;
+    if (!rampingUp && (clock() - lastChk > chkTimeInterval))
+    {
+      lastChk = clock();
+      saveCheckpoint();
+    }
+  }
   doNextStep();
 }
 
