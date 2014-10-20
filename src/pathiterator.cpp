@@ -1,7 +1,7 @@
 #include "pathiterator.h"
 #include "graph.h"
 
-#include <iostream>
+//#include <iostream>
 
 PathIterator::PathIterator(const Graph *g, int now, int target, int length,
     bool *avoid, int smallest, int avoidColour) : graph(g), length(length),
@@ -78,9 +78,9 @@ bool PathIterator::findNext()
         nextPaths = NULL;
       }
     }
-    while (++nextEdgeIndex < graph->nVerts)
+    while (++nextEdgeIndex <= graph->nVerts)
     {
-      nextEdge = graph->edgeLists[nowVert][nextEdgeIndex];
+      nextEdge = graph->edgeLists[nowVert][nextEdgeIndex-1];
       if (nextEdge == NULL)
         continue;
       if (nextEdge->colour != 0) 
