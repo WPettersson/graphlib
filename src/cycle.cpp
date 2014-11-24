@@ -13,6 +13,7 @@ Cycle::Cycle(Graph *g, std::vector<int> avoid, int length, int colour,
 
 void Cycle::run()
 {
+  updateAvoid();
   for (unsigned int v = start; v <= (graph->nVerts-length); v++)
   {
     if (avoid[v])
