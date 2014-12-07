@@ -14,6 +14,7 @@ class Step
     virtual void run() = 0;
     void setColour(int);
     void updateAvoid();
+    void clearAvoid();
 
   protected:
     Graph *graph;

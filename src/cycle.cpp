@@ -41,5 +41,6 @@ void Cycle::run()
     if (lowest)
       return;
   }
+  clearAvoid();
 }
 

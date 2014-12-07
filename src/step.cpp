@@ -35,10 +35,15 @@ void Step::updateAvoid()
   }
 }
 
+void Step::clearAvoid()
+{
+  for (auto a: avoidedNow)
+    avoid[a] = false;
+}
+
 Step::~Step()
 {
-  for (int v: avoidedNow)
-    avoid[v] = false;
+  clearAvoid();
 }
 
 void Step::setColour(int c)
